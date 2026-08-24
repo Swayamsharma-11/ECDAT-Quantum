@@ -10,33 +10,135 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteRouteImport } from './routes/app/route'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppCbomRouteImport } from './routes/app/cbom'
+import { Route as AppInventoryRouteImport } from './routes/app/inventory'
+import { Route as AppQuantumRiskRouteImport } from './routes/app/quantum-risk'
+import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
+import { Route as AuthLoginRouteImport } from './routes/auth/login'
+import { Route as AuthSignupRouteImport } from './routes/auth/signup'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/app',
+  path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppCbomRoute = AppCbomRouteImport.update({
+  id: '/cbom',
+  path: '/cbom',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppInventoryRoute = AppInventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppQuantumRiskRoute = AppQuantumRiskRouteImport.update({
+  id: '/quantum-risk',
+  path: '/quantum-risk',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
+  id: '/auth/forgot-password',
+  path: '/auth/forgot-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthLoginRoute = AuthLoginRouteImport.update({
+  id: '/auth/login',
+  path: '/auth/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/auth/signup',
+  path: '/auth/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/app/cbom': typeof AppCbomRoute
+  '/app/inventory': typeof AppInventoryRoute
+  '/app/quantum-risk': typeof AppQuantumRiskRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/cbom': typeof AppCbomRoute
+  '/app/inventory': typeof AppInventoryRoute
+  '/app/quantum-risk': typeof AppQuantumRiskRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/app/cbom': typeof AppCbomRoute
+  '/app/inventory': typeof AppInventoryRoute
+  '/app/quantum-risk': typeof AppQuantumRiskRoute
+  '/auth/forgot-password': typeof AuthForgotPasswordRoute
+  '/auth/login': typeof AuthLoginRoute
+  '/auth/signup': typeof AuthSignupRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/app/cbom'
+    | '/app/inventory'
+    | '/app/quantum-risk'
+    | '/auth/forgot-password'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/app/cbom'
+    | '/app/inventory'
+    | '/app/quantum-risk'
+    | '/auth/forgot-password'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/app'
+  id:
+    | '__root__'
+    | '/'
+    | '/app'
+    | '/app/cbom'
+    | '/app/inventory'
+    | '/app/quantum-risk'
+    | '/auth/forgot-password'
+    | '/auth/login'
+    | '/auth/signup'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  AuthForgotPasswordRoute: typeof AuthForgotPasswordRoute
+  AuthLoginRoute: typeof AuthLoginRoute
+  AuthSignupRoute: typeof AuthSignupRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +150,89 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/cbom': {
+      id: '/app/cbom'
+      path: '/cbom'
+      fullPath: '/app/cbom'
+      preLoaderRoute: typeof AppCbomRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/inventory': {
+      id: '/app/inventory'
+      path: '/inventory'
+      fullPath: '/app/inventory'
+      preLoaderRoute: typeof AppInventoryRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/app/quantum-risk': {
+      id: '/app/quantum-risk'
+      path: '/quantum-risk'
+      fullPath: '/app/quantum-risk'
+      preLoaderRoute: typeof AppQuantumRiskRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/auth/forgot-password': {
+      id: '/auth/forgot-password'
+      path: '/auth/forgot-password'
+      fullPath: '/auth/forgot-password'
+      preLoaderRoute: typeof AuthForgotPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/login': {
+      id: '/auth/login'
+      path: '/auth/login'
+      fullPath: '/auth/login'
+      preLoaderRoute: typeof AuthLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/auth/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AppRouteRouteChildren {
+  AppCbomRoute: typeof AppCbomRoute
+  AppInventoryRoute: typeof AppInventoryRoute
+  AppQuantumRiskRoute: typeof AppQuantumRiskRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppCbomRoute: AppCbomRoute,
+  AppInventoryRoute: AppInventoryRoute,
+  AppQuantumRiskRoute: AppQuantumRiskRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  AuthForgotPasswordRoute: AuthForgotPasswordRoute,
+  AuthLoginRoute: AuthLoginRoute,
+  AuthSignupRoute: AuthSignupRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
