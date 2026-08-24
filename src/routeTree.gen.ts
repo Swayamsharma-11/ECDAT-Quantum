@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AppRouteRouteImport } from './routes/app/route'
 import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppCbomRouteImport } from './routes/app/cbom'
 import { Route as AppInventoryRouteImport } from './routes/app/inventory'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
@@ -30,6 +31,11 @@ const AppRouteRoute = AppRouteRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppCbomRoute = AppCbomRouteImport.update({
+  id: '/cbom',
+  path: '/cbom',
   getParentRoute: () => AppRouteRoute,
 } as any)
 const AppInventoryRoute = AppInventoryRouteImport.update({
@@ -56,6 +62,7 @@ const AuthSignupRoute = AuthSignupRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
+  '/app/cbom': typeof AppCbomRoute
   '/app/inventory': typeof AppInventoryRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
@@ -64,6 +71,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/app/cbom': typeof AppCbomRoute
   '/app/inventory': typeof AppInventoryRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
@@ -74,6 +82,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/app': typeof AppRouteRouteWithChildren
+  '/app/cbom': typeof AppCbomRoute
   '/app/inventory': typeof AppInventoryRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
@@ -85,6 +94,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/app'
+    | '/app/cbom'
     | '/app/inventory'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -93,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/app/cbom'
     | '/app/inventory'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -102,6 +113,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/app'
+    | '/app/cbom'
     | '/app/inventory'
     | '/auth/forgot-password'
     | '/auth/login'
@@ -140,6 +152,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/cbom': {
+      id: '/app/cbom'
+      path: '/cbom'
+      fullPath: '/app/cbom'
+      preLoaderRoute: typeof AppCbomRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/app/inventory': {
       id: '/app/inventory'
       path: '/inventory'
@@ -172,11 +191,13 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteRouteChildren {
+  AppCbomRoute: typeof AppCbomRoute
   AppInventoryRoute: typeof AppInventoryRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
 const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppCbomRoute: AppCbomRoute,
   AppInventoryRoute: AppInventoryRoute,
   AppIndexRoute: AppIndexRoute,
 }
