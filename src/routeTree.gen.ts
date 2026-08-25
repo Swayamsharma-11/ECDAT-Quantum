@@ -16,6 +16,7 @@ import { Route as AppCbomRouteImport } from './routes/app/cbom'
 import { Route as AppInventoryRouteImport } from './routes/app/inventory'
 import { Route as AppPqcRouteImport } from './routes/app/pqc'
 import { Route as AppQuantumRiskRouteImport } from './routes/app/quantum-risk'
+import { Route as AppRoadmapRouteImport } from './routes/app/roadmap'
 import { Route as AuthForgotPasswordRouteImport } from './routes/auth/forgot-password'
 import { Route as AuthLoginRouteImport } from './routes/auth/login'
 import { Route as AuthSignupRouteImport } from './routes/auth/signup'
@@ -55,6 +56,11 @@ const AppQuantumRiskRoute = AppQuantumRiskRouteImport.update({
   path: '/quantum-risk',
   getParentRoute: () => AppRouteRoute,
 } as any)
+const AppRoadmapRoute = AppRoadmapRouteImport.update({
+  id: '/roadmap',
+  path: '/roadmap',
+  getParentRoute: () => AppRouteRoute,
+} as any)
 const AuthForgotPasswordRoute = AuthForgotPasswordRouteImport.update({
   id: '/auth/forgot-password',
   path: '/auth/forgot-password',
@@ -78,6 +84,7 @@ export interface FileRoutesByFullPath {
   '/app/inventory': typeof AppInventoryRoute
   '/app/pqc': typeof AppPqcRoute
   '/app/quantum-risk': typeof AppQuantumRiskRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -89,6 +96,7 @@ export interface FileRoutesByTo {
   '/app/inventory': typeof AppInventoryRoute
   '/app/pqc': typeof AppPqcRoute
   '/app/quantum-risk': typeof AppQuantumRiskRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -102,6 +110,7 @@ export interface FileRoutesById {
   '/app/inventory': typeof AppInventoryRoute
   '/app/pqc': typeof AppPqcRoute
   '/app/quantum-risk': typeof AppQuantumRiskRoute
+  '/app/roadmap': typeof AppRoadmapRoute
   '/auth/forgot-password': typeof AuthForgotPasswordRoute
   '/auth/login': typeof AuthLoginRoute
   '/auth/signup': typeof AuthSignupRoute
@@ -116,6 +125,7 @@ export interface FileRouteTypes {
     | '/app/inventory'
     | '/app/pqc'
     | '/app/quantum-risk'
+    | '/app/roadmap'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/signup'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
     | '/app/inventory'
     | '/app/pqc'
     | '/app/quantum-risk'
+    | '/app/roadmap'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/signup'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '/app/inventory'
     | '/app/pqc'
     | '/app/quantum-risk'
+    | '/app/roadmap'
     | '/auth/forgot-password'
     | '/auth/login'
     | '/auth/signup'
@@ -204,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppQuantumRiskRouteImport
       parentRoute: typeof AppRouteRoute
     }
+    '/app/roadmap': {
+      id: '/app/roadmap'
+      path: '/roadmap'
+      fullPath: '/app/roadmap'
+      preLoaderRoute: typeof AppRoadmapRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
     '/auth/forgot-password': {
       id: '/auth/forgot-password'
       path: '/auth/forgot-password'
@@ -233,6 +252,7 @@ interface AppRouteRouteChildren {
   AppInventoryRoute: typeof AppInventoryRoute
   AppPqcRoute: typeof AppPqcRoute
   AppQuantumRiskRoute: typeof AppQuantumRiskRoute
+  AppRoadmapRoute: typeof AppRoadmapRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
@@ -241,6 +261,7 @@ const AppRouteRouteChildren: AppRouteRouteChildren = {
   AppInventoryRoute: AppInventoryRoute,
   AppPqcRoute: AppPqcRoute,
   AppQuantumRiskRoute: AppQuantumRiskRoute,
+  AppRoadmapRoute: AppRoadmapRoute,
   AppIndexRoute: AppIndexRoute,
 }
 
